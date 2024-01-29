@@ -2,7 +2,7 @@
   "imu": {
     "type": "pigeon2",
     "id": 5,
-    "canbus": "rio"
+    "canbus": "Hannibal the CANibal"
   },
   "invertedIMU": false,
   "modules": [
