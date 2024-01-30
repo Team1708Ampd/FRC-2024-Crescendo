@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import swervelib.SwerveController;
 import swervelib.math.SwerveMath;
@@ -26,7 +25,7 @@ public class AbsoluteDriveAdv extends Command
   private final SwerveSubsystem swerve;
   private final DoubleSupplier  vX, vY;
   private final DoubleSupplier  headingAdjust;
-  private final BooleanSupplier lookAway, lookTowards, lookLeft, lookRight;
+  private final boolean lookAway, lookTowards, lookLeft, lookRight;
   private       boolean         resetHeading = false;
 
   /**
@@ -50,8 +49,8 @@ public class AbsoluteDriveAdv extends Command
    * @param lookRight     Face the robot right
    */
   public AbsoluteDriveAdv(SwerveSubsystem swerve, DoubleSupplier vX, DoubleSupplier vY, DoubleSupplier headingAdjust,
-                          BooleanSupplier lookAway, BooleanSupplier lookTowards, BooleanSupplier lookLeft,
-                          BooleanSupplier lookRight)
+                          boolean lookAway, boolean lookTowards, boolean lookLeft,
+                          boolean lookRight)
   {
     this.swerve = swerve;
     this.vX = vX;
@@ -80,22 +79,22 @@ public class AbsoluteDriveAdv extends Command
 
     // These are written to allow combinations for 45 angles
     // Face Away from Drivers
-    if (lookAway.getAsBoolean())
+    if (lookAway)
     {
       headingY = -1;
     }
     // Face Right
-    if (lookRight.getAsBoolean())
+    if (lookRight)
     {
       headingX = 1;
     }
     // Face Left
-    if (lookLeft.getAsBoolean())
+    if (lookLeft)
     {
       headingX = -1;
     }
     // Face Towards the Drivers
-    if (lookTowards.getAsBoolean())
+    if (lookTowards)
     {
       headingY = 1;
     }
