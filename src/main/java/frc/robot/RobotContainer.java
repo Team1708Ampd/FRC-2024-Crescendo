@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
+import frc.robot.commands.WristDown;
+import frc.robot.commands.WristUp;
 import frc.robot.commands.drive.AbsoluteDriveAdv;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
@@ -119,6 +121,8 @@ public class RobotContainer
     driverXbox.y().whileTrue(new ArmUp());
     driverXbox.b().onTrue(new InstantCommand(drivebase::zeroGyro));
     driverXbox.x().onTrue(new InstantCommand(drivebase::addFakeVisionReading));
+    driverXbox.leftBumper().whileTrue(new WristUp());
+    driverXbox.rightBumper().whileTrue(new WristDown());
     driverXbox.leftTrigger().whileTrue(new ArmDown());
   }
 
