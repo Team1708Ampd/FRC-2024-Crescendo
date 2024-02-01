@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.RobotShooterSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
 /**
@@ -26,6 +27,8 @@ public class Robot extends TimedRobot {
   public static WristSubsystem wristSub = new WristSubsystem(); 
 
   public static IntakeSubsystem intakeSub = new IntakeSubsystem();
+
+  public static RobotShooterSubsystem Shooter = new RobotShooterSubsystem(); 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.

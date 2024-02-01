@@ -8,13 +8,14 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class IntakeSubsystem extends SubsystemBase {
-  /** Creates a new IntakeSubsystem. */
-  TalonFX Shooter =new TalonFX(7);
-  public IntakeSubsystem() {}
-  public void setpower(double power){
-    Shooter.set(power);
-  }
+public class RobotShooterSubsystem extends SubsystemBase {
+  /** Creates a new RobotShooter. */
+ TalonFX ShooterMotor = new TalonFX(3); 
+  public RobotShooterSubsystem() {}
+public void setPower(double power){
+  ShooterMotor.set(power);
+}
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -21,6 +21,7 @@ import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.Shooter;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.commands.drive.AbsoluteDriveAdv;
@@ -66,6 +67,7 @@ public class RobotContainer
     NamedCommands.registerCommand("ArmDown", new ArmDown());
     NamedCommands.registerCommand("Intake", new IntakeCommand());
     NamedCommands.registerCommand("Outtake", new OuttakeCommand());
+    NamedCommands.registerCommand("Shoot", new Shooter());
 
     // Configure the trigger bindings
     configureBindings();
@@ -130,6 +132,7 @@ public class RobotContainer
     driverXbox.leftTrigger().whileTrue(new ArmDown());
     driverXbox.a().whileTrue(new IntakeCommand());
     driverXbox.start().whileTrue(new OuttakeCommand());
+    driverXbox.rightTrigger().whileTrue(new Shooter()); 
   }
 
   /**
