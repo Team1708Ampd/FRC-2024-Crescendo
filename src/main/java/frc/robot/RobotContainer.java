@@ -19,9 +19,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuttakeCommand;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.commands.drive.AbsoluteDriveAdv;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
 
@@ -61,7 +64,8 @@ public class RobotContainer
     //register Named Commands to use in auto path planner;
     NamedCommands.registerCommand("ArmUp", new ArmUp());
     NamedCommands.registerCommand("ArmDown", new ArmDown());
-
+    NamedCommands.registerCommand("Intake", new IntakeCommand());
+    NamedCommands.registerCommand("Outtake", new OuttakeCommand());
 
     // Configure the trigger bindings
     configureBindings();
@@ -124,6 +128,8 @@ public class RobotContainer
     driverXbox.leftBumper().whileTrue(new WristUp());
     driverXbox.rightBumper().whileTrue(new WristDown());
     driverXbox.leftTrigger().whileTrue(new ArmDown());
+    driverXbox.a().whileTrue(new IntakeCommand());
+    driverXbox.start().whileTrue(new OuttakeCommand());
   }
 
   /**
