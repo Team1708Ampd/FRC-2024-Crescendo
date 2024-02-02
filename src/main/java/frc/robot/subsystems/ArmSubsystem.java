@@ -16,7 +16,7 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {}
 
   public void setSpeed(double speed){
-    leftArm.set(speed);
+    leftArm.set(-speed);
     rightArm.set(speed);
   }
 

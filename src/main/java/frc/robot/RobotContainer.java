@@ -72,46 +72,46 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
-    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-                                                                   () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
-                                                                                                OperatorConstants.LEFT_Y_DEADBAND),
-                                                                   () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-                                                                                                OperatorConstants.LEFT_X_DEADBAND),
-                                                                   () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-                                                                                                OperatorConstants.RIGHT_X_DEADBAND),
-                                                                   driverXbox.y().getAsBoolean(),
-                                                                   driverXbox.a().getAsBoolean(),
-                                                                   driverXbox.x().getAsBoolean(),
-                                                                   driverXbox.b().getAsBoolean());
+    // AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+    //                                                                () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+    //                                                                                             OperatorConstants.LEFT_Y_DEADBAND),
+    //                                                                () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    //                                                                                             OperatorConstants.LEFT_X_DEADBAND),
+    //                                                                () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    //                                                                                             OperatorConstants.RIGHT_X_DEADBAND),
+    //                                                                driverXbox.y().getAsBoolean(),
+    //                                                                driverXbox.a().getAsBoolean(),
+    //                                                                driverXbox.x().getAsBoolean(),
+    //                                                                driverXbox.b().getAsBoolean());
 
-    // Applies deadbands and inverts controls because joysticks
-    // are back-right positive while robot
-    // controls are front-left positive
-    // left stick controls translation
-    // right stick controls the desired angle NOT angular rotation
-    Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRightX(),
-        () -> driverXbox.getRightY());
+    // // Applies deadbands and inverts controls because joysticks
+    // // are back-right positive while robot
+    // // controls are front-left positive
+    // // left stick controls translation
+    // // right stick controls the desired angle NOT angular rotation
+    // Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+    //     () -> driverXbox.getRightX(),
+    //     () -> driverXbox.getRightY());
 
-    // Applies deadbands and inverts controls because joysticks
-    // are back-right positive while robot
-    // controls are front-left positive
-    // left stick controls translation
-    // right stick controls the angular velocity of the robot
-    Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(2));
+    // // Applies deadbands and inverts controls because joysticks
+    // // are back-right positive while robot
+    // // controls are front-left positive
+    // // left stick controls translation
+    // // right stick controls the angular velocity of the robot
+    // Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+    //     () -> driverXbox.getRawAxis(2));
 
-    Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(2));
+    // Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+    //     () -> driverXbox.getRawAxis(2));
 
-    drivebase.setDefaultCommand(
-        !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
+    // drivebase.setDefaultCommand(
+    //     !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
   }
 
   /**
@@ -124,14 +124,13 @@ public class RobotContainer
   private void configureBindings()
   {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    driverXbox.y().whileTrue(new ArmUp());
-    driverXbox.b().onTrue(new InstantCommand(drivebase::zeroGyro));
-    driverXbox.x().onTrue(new InstantCommand(drivebase::addFakeVisionReading));
+    driverXbox.y().whileTrue(new ArmDown());
+    // driverXbox.b().onTrue(new InstantCommand(drivebase::zeroGyro));
     driverXbox.leftBumper().whileTrue(new WristUp());
     driverXbox.rightBumper().whileTrue(new WristDown());
-    driverXbox.leftTrigger().whileTrue(new ArmDown());
-    driverXbox.a().whileTrue(new IntakeCommand());
-    driverXbox.start().whileTrue(new OuttakeCommand());
+    driverXbox.x().whileTrue(new IntakeCommand());
+    driverXbox.a().whileTrue(new ArmUp());
+    driverXbox.b().whileTrue(new OuttakeCommand());
     driverXbox.rightTrigger().whileTrue(new Shooter()); 
   }
 
