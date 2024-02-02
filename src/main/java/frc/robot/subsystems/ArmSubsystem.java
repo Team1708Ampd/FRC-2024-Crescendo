@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  CANSparkMax leftArm = new CANSparkMax(0, MotorType.kBrushless);
-  CANSparkMax rightArm = new CANSparkMax(1, MotorType.kBrushless);
+  CANSparkMax leftArm = new CANSparkMax(8, MotorType.kBrushless);
+  CANSparkMax rightArm = new CANSparkMax(9, MotorType.kBrushless);
   public ArmSubsystem() {}
 
   public void setSpeed(double speed){

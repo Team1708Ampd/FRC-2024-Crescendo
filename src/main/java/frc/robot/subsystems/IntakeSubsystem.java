@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  TalonFX intakemotor=new TalonFX(7);
+  TalonFX intakemotor=new TalonFX(11);
   public IntakeSubsystem() {}
   public void setpower(double power){
     intakemotor.set(power);
