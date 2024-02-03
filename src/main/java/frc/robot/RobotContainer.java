@@ -8,6 +8,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -48,7 +49,7 @@ public class RobotContainer
   CommandJoystick driverController = new CommandJoystick(1);
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-  CommandXboxController driverXbox = new CommandXboxController(0);
+  static CommandXboxController driverXbox = new CommandXboxController(0);
 
   private final SendableChooser<Command> autoChooser;
 
@@ -132,6 +133,11 @@ public class RobotContainer
     driverXbox.a().whileTrue(new ArmUp());
     driverXbox.b().whileTrue(new OuttakeCommand());
     driverXbox.rightTrigger().whileTrue(new Shooter()); 
+    
+  }
+
+  public static void setRumble() {
+    driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1);
   }
 
   /**
