@@ -25,11 +25,12 @@ import frc.robot.commands.OuttakeCommand;
 import frc.robot.commands.Shooter;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
-import frc.robot.commands.drive.AbsoluteDriveAdv;
+import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
@@ -42,102 +43,52 @@ public class RobotContainer
 {
 
   // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
-                                                                         "swerve"));
+
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  CommandJoystick driverController = new CommandJoystick(1);
+  CommandJoystick mechanisms = new CommandJoystick(1);
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-  static CommandXboxController driverXbox = new CommandXboxController(0);
+    private final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+  private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; 
 
-  private final SendableChooser<Command> autoChooser;
-
-
+  private double MaxSpeed = 6; // 6 meters per second desired top speed
+  private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
+  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
+                                                               // driving in open loop
+  private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+  private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer()
   {
     //create chooser for different autos
-    autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Picker", autoChooser);
-
-    //register Named Commands to use in auto path planner;
-    NamedCommands.registerCommand("ArmUp", new ArmUp());
-    NamedCommands.registerCommand("ArmDown", new ArmDown());
-    NamedCommands.registerCommand("Intake", new IntakeCommand());
-    NamedCommands.registerCommand("Outtake", new OuttakeCommand());
-    NamedCommands.registerCommand("Shoot", new Shooter());
 
     // Configure the trigger bindings
     configureBindings();
 
-    // AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-    //                                     uv                           () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
-    //                                                                                             OperatorConstants.LEFT_Y_DEADBAND),
-    //                                                                () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-    //                                                                                             OperatorConstants.LEFT_X_DEADBAND),
-    //                                                                () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-    //                                                                                             OperatorConstants.RIGHT_X_DEADBAND),
-    //                                                                driverXbox.y().getAsBoolean(),
-    //                                                                driverXbox.a().getAsBoolean(),
-    //                                                                driverXbox.x().getAsBoolean(),
-    //                                                                driverXbox.b().getAsBoolean());
-
-    // // Applies deadbands and inverts controls because joysticks
-    // // are back-right positive while robot
-    // // controls are front-left positive
-    // // left stick controls translation
-    // // right stick controls the desired angle NOT angular rotation
-    // Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-    //     () -> driverXbox.getRightX(),
-    //     () -> driverXbox.getRightY());
-
-    // // Applies deadbands and inverts controls because joysticks
-    // // are back-right positive while robot
-    // // controls are front-left positive
-    // // left stick controls translation
-    // // right stick controls the angular velocity of the robot
-    // Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-    //     () -> driverXbox.getRawAxis(2));
-
-    // Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-    //     () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-    //     () -> driverXbox.getRawAxis(2));
-
-    // drivebase.setDefaultCommand(
-    //     !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
-  }
-
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary predicate, or via the
-   * named factories in {@link edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
-   * {@link CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller PS4}
-   * controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight joysticks}.
-   */
-  private void configureBindings()
-  {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    driverXbox.y().whileTrue(new ArmDown());
-    // driverXbox.b().onTrue(new InstantCommand(drivebase::zeroGyro));
-    driverXbox.leftBumper().whileTrue(new WristUp());
-    driverXbox.rightBumper().whileTrue(new WristDown());
-    driverXbox.x().whileTrue(new IntakeCommand());
-    driverXbox.a().whileTrue(new ArmUp());
-    driverXbox.b().whileTrue(new OuttakeCommand());
-    driverXbox.rightTrigger().whileTrue(new Shooter()); 
     
   }
 
-  public static void setRumble() {
-    driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1);
+  private void configureBindings()
+  {
+    drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
+    drivetrain.applyRequest(() -> drive.withVelocityX(joystick.getLeftX() * MaxSpeed) // Drive forward with
+                                                                                       // negative Y (forward)
+        .withVelocityY(-joystick.getLeftY() * MaxSpeed) // Drive left with negative X (left)
+        .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+    ));
+    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    joystick.y().whileTrue(new ArmDown());
+    joystick.leftBumper().whileTrue(new WristUp());
+    joystick.rightBumper().whileTrue(new WristDown());
+    joystick.x().whileTrue(new IntakeCommand());
+    joystick.a().whileTrue(new ArmUp());
+    joystick.b().whileTrue(new OuttakeCommand());
+    joystick.rightTrigger().whileTrue(new Shooter()); 
   }
 
   /**
@@ -146,17 +97,6 @@ public class RobotContainer
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoChooser.getSelected();
-  }
-
-
-  public void setDriveMode()
-  {
-    //drivebase.setDefaultCommand();
-  }
-
-  public void setMotorBrake(boolean brake)
-  {
-    drivebase.setMotorBrake(brake);
+    return null;
   }
 }
