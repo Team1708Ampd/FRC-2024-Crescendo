@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -54,12 +55,12 @@ public class RobotContainer
 
   private double MaxSpeed = 6; // 6 meters per second desired top speed
   private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
-  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+  private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
-  private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
-  private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+  private Command runAuto = drivetrain.getAutoPath("Tests");
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -69,16 +70,21 @@ public class RobotContainer
 
     // Configure the trigger bindings
     configureBindings();
-
-    
+    NamedCommands.registerCommand("Intake", new IntakeCommand());
+    NamedCommands.registerCommand("Outtake", new OuttakeCommand());
+    NamedCommands.registerCommand("Wrist Up", new WristUp());
+    NamedCommands.registerCommand("Wrist Down", new WristDown());
+    NamedCommands.registerCommand("Arm Up", new ArmUp());
+    NamedCommands.registerCommand("Arm Down", new ArmDown());
+    NamedCommands.registerCommand("Shoot", new Shooter());
   }
 
   private void configureBindings()
   {
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-    drivetrain.applyRequest(() -> drive.withVelocityX(joystick.getLeftX() * MaxSpeed) // Drive forward with
+    drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
                                                                                        // negative Y (forward)
-        .withVelocityY(-joystick.getLeftY() * MaxSpeed) // Drive left with negative X (left)
+        .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
         .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
     ));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
@@ -97,6 +103,6 @@ public class RobotContainer
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    return runAuto;
   }
 }

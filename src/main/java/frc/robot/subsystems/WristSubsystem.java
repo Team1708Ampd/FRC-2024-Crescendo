@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,7 +13,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class WristSubsystem extends SubsystemBase {
   /** Creates a new WristSubsystem. */
   CANSparkMax Wrist = new CANSparkMax (10, MotorType.kBrushless); 
-  public WristSubsystem() {}
+  public WristSubsystem() {
+    Wrist.setIdleMode(IdleMode.kBrake);
+  }
   
   public void setSpeed(double speed){
     Wrist.set(speed);

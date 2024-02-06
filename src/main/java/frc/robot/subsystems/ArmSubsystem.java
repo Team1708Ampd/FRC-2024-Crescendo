@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,7 +14,10 @@ public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
   CANSparkMax leftArm = new CANSparkMax(8, MotorType.kBrushless);
   CANSparkMax rightArm = new CANSparkMax(9, MotorType.kBrushless);
-  public ArmSubsystem() {}
+  public ArmSubsystem() {
+    leftArm.setIdleMode(IdleMode.kBrake);
+    rightArm.setIdleMode(IdleMode.kBrake);
+  }
 
   public void setSpeed(double speed){
     leftArm.set(-speed);
