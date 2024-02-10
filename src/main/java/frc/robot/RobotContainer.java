@@ -8,6 +8,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,6 +24,8 @@ import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.SetArmToBottom;
+import frc.robot.commands.SetArmToTop;
 import frc.robot.commands.Shooter;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
@@ -47,14 +50,14 @@ public class RobotContainer
 
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  CommandJoystick mechanisms = new CommandJoystick(1);
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-    private final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+    public final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+    public final CommandXboxController mechanisms = new CommandXboxController(1);
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; 
 
   private double MaxSpeed = 6; // 6 meters per second desired top speed
-  private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
+  private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotation per second max angular velocity
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
@@ -83,18 +86,31 @@ public class RobotContainer
   {
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
     drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
-                                                                                       // negative Y (forward)
+                                                                                      // negative Y (forward)
         .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
         .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
     ));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    joystick.y().whileTrue(new ArmDown());
-    joystick.leftBumper().whileTrue(new WristUp());
-    joystick.rightBumper().whileTrue(new WristDown());
-    joystick.x().whileTrue(new IntakeCommand());
-    joystick.a().whileTrue(new ArmUp());
-    joystick.b().whileTrue(new OuttakeCommand());
-    joystick.rightTrigger().whileTrue(new Shooter()); 
+    // joystick.y().whileTrue(new ArmDown());
+    // joystick.leftBumper().whileTrue(new WristUp());
+    // joystick.rightBumper().whileTrue(new WristDown());
+    // joystick.x().whileTrue(new IntakeCommand());
+    // joystick.a().whileTrue(new ArmUp());
+    // joystick.b().whileTrue(new OuttakeCommand());
+    // joystick.rightTrigger().whileTrue(new Shooter()); 
+    // joystick.start().onTrue(new SetArmToBottom());
+
+    joystick.leftTrigger().whileTrue(new IntakeCommand());
+    joystick.leftBumper().whileTrue(new OuttakeCommand());
+    joystick.rightTrigger().whileTrue(new Shooter());
+
+    mechanisms.rightTrigger().whileTrue(new WristDown());
+    mechanisms.leftTrigger().whileTrue(new ArmDown());
+    mechanisms.rightBumper().whileTrue(new WristUp());
+    mechanisms.leftBumper().whileTrue(new ArmUp());
+    mechanisms.y().onTrue(new SetArmToTop());
+    mechanisms.a().onTrue(new SetArmToBottom());
+    
   }
 
   /**

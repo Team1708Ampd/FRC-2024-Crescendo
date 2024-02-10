@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -12,16 +15,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  CANSparkMax leftArm = new CANSparkMax(8, MotorType.kBrushless);
-  CANSparkMax rightArm = new CANSparkMax(9, MotorType.kBrushless);
+  TalonFX leftArm = new TalonFX(8);
+  TalonFX rightArm = new TalonFX(9);
+  CANcoder armEncoder = new CANcoder(4);
   public ArmSubsystem() {
-    leftArm.setIdleMode(IdleMode.kBrake);
-    rightArm.setIdleMode(IdleMode.kBrake);
+    leftArm.setNeutralMode(NeutralModeValue.Brake);
+    rightArm.setNeutralMode(NeutralModeValue.Brake);
   }
 
   public void setSpeed(double speed){
     leftArm.set(-speed);
     rightArm.set(speed);
+  }
+
+  public double getPosition() {
+    return armEncoder.getAbsolutePosition().getValueAsDouble() * 360;
+  }
+
+  public void printPosition() {
+    System.out.println(armEncoder.getAbsolutePosition().getValueAsDouble() * 360);
   }
 
   @Override
