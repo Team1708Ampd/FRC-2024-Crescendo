@@ -28,7 +28,6 @@ public class Shooter extends Command {
   @Override
   public void end(boolean interrupted) {
     Robot.Shooter.setPower(0);
-    
   }
 
 
