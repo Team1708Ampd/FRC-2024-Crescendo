@@ -57,9 +57,9 @@ public class RobotContainer
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; 
 
   private double MaxSpeed = 6; // 6 meters per second desired top speed
-  private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotation per second max angular velocity
+  private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotations per second max angular velocity
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
-      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDeadband(MaxSpeed * 0.2).withRotationalDeadband(MaxAngularRate * 0.2) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
   private Command runAuto = drivetrain.getAutoPath("Tests");

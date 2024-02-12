@@ -71,8 +71,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
 
     public Command getAutoPath(String pathName) {
-        // return new PathPlannerAuto(pathName);
-        return null;
+        return new PathPlannerAuto(pathName);
     }
 
     public ChassisSpeeds getCurrentRobotChassisSpeeds() {
