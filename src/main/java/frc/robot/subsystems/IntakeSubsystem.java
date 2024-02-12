@@ -5,15 +5,17 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  TalonFX Shooter =new TalonFX(7);
+  CANSparkMax intakemotor=new CANSparkMax(11, MotorType.kBrushless);
   public IntakeSubsystem() {}
   public void setpower(double power){
-    Shooter.set(power);
+    intakemotor.set(power);
   }
   @Override
   public void periodic() {

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RobotShooterSubsystem extends SubsystemBase {
   /** Creates a new RobotShooter. */
- TalonFX ShooterMotor = new TalonFX(3); 
+ TalonFX ShooterMotor = new TalonFX(12); 
   public RobotShooterSubsystem() {}
 public void setPower(double power){
   ShooterMotor.set(power);
