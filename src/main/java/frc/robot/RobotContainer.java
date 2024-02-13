@@ -4,23 +4,11 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.IntakeCommand;
@@ -31,8 +19,6 @@ import frc.robot.commands.Shooter;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.IntakeSubsystem;
-import java.io.File;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
@@ -67,7 +53,8 @@ public class RobotContainer
       .withDeadband(MaxSpeed * 0.2).withRotationalDeadband(MaxAngularRate * 0.2) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
-  private Command runAuto = drivetrain.getAutoPath("Tests");
+  private final SendableChooser<Command> autoChooser;
+
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -85,6 +72,9 @@ public class RobotContainer
     NamedCommands.registerCommand("Arm Up", new ArmUp());
     NamedCommands.registerCommand("Arm Down", new ArmDown());
     NamedCommands.registerCommand("Shoot", new Shooter());
+
+    autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+    SmartDashboard.putData("Auto Mode", autoChooser);
   }
 
   private void configureBindings()
@@ -124,6 +114,6 @@ public class RobotContainer
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return runAuto;
+    return autoChooser.getSelected();
   }
 }
