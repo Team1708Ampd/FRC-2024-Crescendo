@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
@@ -56,6 +57,10 @@ public class RobotContainer
     public final CommandXboxController mechanisms = new CommandXboxController(1);
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; 
 
+  // Slew rate limiter used to limit "acceleration" of the controller speicifed drive input
+  private SlewRateLimiter ctrlYLimiter = new SlewRateLimiter(0.5);
+  private SlewRateLimiter ctrlXLimiter = new SlewRateLimiter(0.5);
+
   private double MaxSpeed = 6; // 6 meters per second desired top speed
   private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotations per second max angular velocity
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
@@ -85,9 +90,9 @@ public class RobotContainer
   private void configureBindings()
   {
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-    drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
+    drivetrain.applyRequest(() -> drive.withVelocityX(ctrlYLimiter.calculate(-joystick.getLeftY()) * MaxSpeed) // Drive forward with
                                                                                       // negative Y (forward)
-        .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+        .withVelocityY(ctrlXLimiter.calculate(-joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
         .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
     ));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
