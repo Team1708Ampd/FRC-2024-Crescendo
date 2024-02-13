@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7911138899200891,
+      "y": 6.630585568863446
+    },
+    "rotation": -120.96375653207355
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue 1.1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue 1.2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue 1.3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue 1.4"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Blue Autos",
+  "choreoAuto": false
+}
