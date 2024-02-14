@@ -5,16 +5,29 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  TalonFX intakemotor=new TalonFX(11);
-  public IntakeSubsystem() {}
+  CANSparkMax intakemotor=new CANSparkMax(11, MotorType.kBrushless);
+  static DigitalInput beamBreak = new DigitalInput(1);
+
+  public IntakeSubsystem() {
+
+  }
+
+  public static boolean getBeam() {
+    return !beamBreak.get();
+  }
+
   public void setpower(double power){
     intakemotor.set(power);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

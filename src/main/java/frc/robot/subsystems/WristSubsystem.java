@@ -10,6 +10,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.util.Color;
@@ -19,8 +22,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class WristSubsystem extends SubsystemBase {
   /** Creates a new WristSubsystem. */
   CANSparkMax Wrist = new CANSparkMax (10, MotorType.kBrushless); 
+  DutyCycleEncoder encoder = new DutyCycleEncoder(0);
+
   public WristSubsystem() {
     Wrist.setIdleMode(IdleMode.kBrake);
+  }
+
+  public double getAngle() {
+    return encoder.getAbsolutePosition();
   }
   
   public void setSpeed(double speed){

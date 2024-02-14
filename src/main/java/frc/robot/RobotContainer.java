@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
@@ -19,7 +20,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.IntakeCommand;
@@ -52,9 +52,11 @@ public class RobotContainer
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-    public final CommandXboxController joystick = new CommandXboxController(0); // My joystick
-    public final CommandXboxController mechanisms = new CommandXboxController(1);
+  public final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+  public final CommandXboxController mechanisms = new CommandXboxController(1);
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; 
+                                                                 
+  private final SendableChooser<Command> autoChooser;
 
   private double MaxSpeed = 6; // 6 meters per second desired top speed
   private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotation per second max angular velocity
@@ -62,8 +64,7 @@ public class RobotContainer
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
-  private Command runAuto = drivetrain.getAutoPath("Tests");
-
+ 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -80,6 +81,9 @@ public class RobotContainer
     NamedCommands.registerCommand("Arm Up", new ArmUp());
     NamedCommands.registerCommand("Arm Down", new ArmDown());
     NamedCommands.registerCommand("Shoot", new Shooter());
+
+    autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+    SmartDashboard.putData("Auto Mode", autoChooser);
   }
 
   private void configureBindings()
@@ -100,7 +104,10 @@ public class RobotContainer
     // joystick.rightTrigger().whileTrue(new Shooter()); 
     // joystick.start().onTrue(new SetArmToBottom());
 
-    joystick.leftTrigger().whileTrue(new IntakeCommand());
+    Trigger beam = new Trigger(() -> IntakeSubsystem.getBeam());
+
+    joystick.leftTrigger().and(beam).and(joystick.rightTrigger().negate()).whileTrue(new IntakeCommand());
+    joystick.leftTrigger().and(joystick.rightTrigger()).whileTrue(new IntakeCommand());
     joystick.leftBumper().whileTrue(new OuttakeCommand());
     joystick.rightTrigger().whileTrue(new Shooter());
 
@@ -119,6 +126,6 @@ public class RobotContainer
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return runAuto;
+    return autoChooser.getSelected();
   }
 }
