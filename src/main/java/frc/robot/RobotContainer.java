@@ -20,13 +20,22 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.AmpPreset;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
+import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakePreset;
+import frc.robot.commands.LowPowerShot;
 import frc.robot.commands.OuttakeCommand;
 import frc.robot.commands.SetArmToBottom;
 import frc.robot.commands.SetArmToTop;
+import frc.robot.commands.SetWristAmp;
+import frc.robot.commands.SetWristHighGoal;
+import frc.robot.commands.SetWristIntake;
 import frc.robot.commands.Shooter;
+import frc.robot.commands.SpeakerPreset;
+import frc.robot.commands.TrapPreset;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.generated.TunerConstants;
@@ -74,7 +83,7 @@ public class RobotContainer
 
     // Configure the trigger bindings
     configureBindings();
-    NamedCommands.registerCommand("Intake", new IntakeCommand());
+    NamedCommands.registerCommand("Intake", new AutoIntakeCommand());
     NamedCommands.registerCommand("Outtake", new OuttakeCommand());
     NamedCommands.registerCommand("Wrist Up", new WristUp());
     NamedCommands.registerCommand("Wrist Down", new WristDown());
@@ -108,16 +117,20 @@ public class RobotContainer
 
     joystick.leftTrigger().and(beam).and(joystick.rightTrigger().negate()).whileTrue(new IntakeCommand());
     joystick.leftTrigger().and(joystick.rightTrigger()).whileTrue(new IntakeCommand());
+    joystick.rightTrigger().and(joystick.start()).whileTrue(new LowPowerShot());
     joystick.leftBumper().whileTrue(new OuttakeCommand());
-    joystick.rightTrigger().whileTrue(new Shooter());
+    joystick.rightTrigger().and(joystick.start().negate()).whileTrue(new Shooter());
+
 
     mechanisms.rightTrigger().whileTrue(new WristDown());
     mechanisms.leftTrigger().whileTrue(new ArmDown());
     mechanisms.rightBumper().whileTrue(new WristUp());
     mechanisms.leftBumper().whileTrue(new ArmUp());
-    mechanisms.y().onTrue(new SetArmToTop());
-    mechanisms.a().onTrue(new SetArmToBottom());
     
+    mechanisms.y().onTrue(new TrapPreset());
+    mechanisms.a().onTrue(new IntakePreset());
+    mechanisms.x().onTrue(new AmpPreset());
+    mechanisms.b().onTrue(new SpeakerPreset());
   }
 
   /**

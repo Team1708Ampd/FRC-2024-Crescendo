@@ -29,7 +29,7 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public double getAngle() {
-    return encoder.getAbsolutePosition();
+    return encoder.getAbsolutePosition() * 360;
   }
   
   public void setSpeed(double speed){
