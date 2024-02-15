@@ -7,11 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class SetArmToTop extends Command {
-  /** Creates a new SetArmToBottom. */
-  public SetArmToTop() {
+public class SetTrapWrist extends Command {
+  /** Creates a new SetTrapWrist. */
+  public SetTrapWrist() {
+    addRequirements(Robot.wristSub);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.armSub);
   }
 
   // Called when the command is initially scheduled.
@@ -21,23 +21,23 @@ public class SetArmToTop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.armSub.getPosition() < 141.5) {
-      Robot.armSub.setSpeed(0.5);
-    } else if(Robot.armSub.getPosition() > 144.5) {
-      Robot.armSub.setSpeed(-0.5);
+    if(Robot.wristSub.getAngle() > 196) {
+      Robot.wristSub.setSpeed(-0.25);
+    } else if(Robot.wristSub.getAngle() < 196) {
+      Robot.wristSub.setSpeed(0.25);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.armSub.setSpeed(0);
+    Robot.wristSub.setSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(143 - Robot.armSub.getPosition()) <= 1.5) {
+    if(Math.abs(Robot.wristSub.getAngle() - 196) <= 1) {
       return true;
     }
     return false;
