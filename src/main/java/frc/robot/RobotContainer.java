@@ -127,9 +127,9 @@ public class RobotContainer
     mechanisms.rightBumper().whileTrue(new WristUp());
     mechanisms.leftBumper().whileTrue(new ArmUp());
     
-    mechanisms.y().onTrue(new TrapPreset());
+    mechanisms.x().onTrue(new TrapPreset());
     mechanisms.a().onTrue(new IntakePreset());
-    mechanisms.x().onTrue(new AmpPreset());
+    mechanisms.y().onTrue(new AmpPreset());
     mechanisms.b().onTrue(new SpeakerPreset());
   }
 
