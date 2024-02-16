@@ -24,6 +24,7 @@ import frc.robot.commands.AmpPreset;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.AutoIntakeCommand;
+import frc.robot.commands.AutoShootCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakePreset;
 import frc.robot.commands.LowPowerShot;
@@ -85,11 +86,15 @@ public class RobotContainer
     configureBindings();
     NamedCommands.registerCommand("Intake", new AutoIntakeCommand());
     NamedCommands.registerCommand("Outtake", new OuttakeCommand());
-    NamedCommands.registerCommand("Wrist Up", new WristUp());
-    NamedCommands.registerCommand("Wrist Down", new WristDown());
-    NamedCommands.registerCommand("Arm Up", new ArmUp());
-    NamedCommands.registerCommand("Arm Down", new ArmDown());
-    NamedCommands.registerCommand("Shoot", new Shooter());
+
+    NamedCommands.registerCommand("Shoot", new AutoShootCommand());
+
+    NamedCommands.registerCommand("IntakePosition", new IntakePreset());
+    NamedCommands.registerCommand("SpeakerPosition", new SpeakerPreset());
+    NamedCommands.registerCommand("AmpPosition", new AmpPreset());
+    NamedCommands.registerCommand("TrapPosition", new TrapPreset());
+
+    
 
     autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
     SmartDashboard.putData("Auto Mode", autoChooser);
