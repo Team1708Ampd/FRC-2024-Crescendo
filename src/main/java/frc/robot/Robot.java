@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.CANdleSystem;
 import frc.robot.subsystems.RobotShooterSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
@@ -33,6 +34,8 @@ public class Robot extends TimedRobot {
   public static IntakeSubsystem intakeSub = new IntakeSubsystem();
 
   public static RobotShooterSubsystem Shooter = new RobotShooterSubsystem();   
+
+  public static CANdleSystem candle = new CANdleSystem(intakeSub);
  
   double starttime;
   /**

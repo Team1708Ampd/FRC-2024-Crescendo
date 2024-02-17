@@ -41,6 +41,7 @@ import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.CANdleSystem;
 import java.io.File;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
