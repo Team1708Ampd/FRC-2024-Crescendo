@@ -27,10 +27,13 @@ public class WristSubsystem extends SubsystemBase {
 
   public WristSubsystem() {
     Wrist.setIdleMode(IdleMode.kBrake);
+
+    encoder.setDutyCycleRange(1.0/1024.0, 1023.0/1024.0);
+    encoder.setDistancePerRotation(360);
   }
 
   public double getAngle() {
-    return encoder.getAbsolutePosition() * 360;
+    return encoder.getDistance();
   }
   
   public void setSpeed(double speed){
