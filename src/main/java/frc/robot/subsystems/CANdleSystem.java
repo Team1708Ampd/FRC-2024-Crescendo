@@ -12,8 +12,8 @@ public class CANdleSystem extends SubsystemBase {
     
     private final int CANDLE_ID = 6; 
     private final int NUM_LEDS = 60;
-    private final String CAN_BUS = "something";
-    private final CANdle m_candle_1 = new CANdle(CANDLE_ID);
+    private final String CAN_BUS = "rio";
+    private final CANdle m_candle_1 = new CANdle(CANDLE_ID, CAN_BUS);
 
     private IntakeSubsystem intakeRef;
 
@@ -25,15 +25,16 @@ public class CANdleSystem extends SubsystemBase {
         CANdleConfiguration config = new CANdleConfiguration();
         config.stripType = LEDStripType.RGB;
         config.statusLedOffWhenActive = true;
-        config.brightnessScalar = 0.5;
+        config.brightnessScalar = 1;
         config.vBatOutputMode = VBatOutputMode.On;
+        config.disableWhenLOS = true;
         m_candle_1.configAllSettings(config, 100);
 
     }
 
     public void SetColor(int r, int g, int b)
     {
-        m_candle_1.setLEDs(r, g, b);
+        m_candle_1.setLEDs(r, g, b, 0, 0, NUM_LEDS);
     }
 
     @Override
@@ -43,11 +44,11 @@ public class CANdleSystem extends SubsystemBase {
         // Check for beam broken
         if (intakeRef.getBeam())
         {
-            SetColor(0, 255, 0);
+            SetColor(255, 0, 0);
         }
         else
         {
-            SetColor(255, 0, 0);
+            SetColor(0, 255, 0);
         }
     }
 
