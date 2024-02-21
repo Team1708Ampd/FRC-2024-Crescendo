@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -22,14 +23,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class WristSubsystem extends SubsystemBase {
   /** Creates a new WristSubsystem. */
   CANSparkMax Wrist = new CANSparkMax (10, MotorType.kBrushless); 
-  DutyCycleEncoder encoder = new DutyCycleEncoder(0);
+  DutyCycleEncoder encoder = new DutyCycleEncoder(2);
 
   public WristSubsystem() {
     Wrist.setIdleMode(IdleMode.kBrake);
+
+    encoder.setDutyCycleRange(1.0/1024.0, 1023.0/1024.0);
+    encoder.setDistancePerRotation(360);
   }
 
   public double getAngle() {
-    return encoder.getAbsolutePosition() * 360;
+    return encoder.getDistance();
   }
   
   public void setSpeed(double speed){
