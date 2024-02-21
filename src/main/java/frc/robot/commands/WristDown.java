@@ -21,7 +21,7 @@ public class WristDown extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.wristSub.setSpeed(0.75);
+    Robot.wristSub.setSpeed(-0.75);
   }
 
   // Called once the command ends or is interrupted.

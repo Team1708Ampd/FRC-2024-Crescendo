@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase {
@@ -18,6 +19,7 @@ public class ArmSubsystem extends SubsystemBase {
   TalonFX leftArm = new TalonFX(8);
   TalonFX rightArm = new TalonFX(9);
   CANcoder armEncoder = new CANcoder(4);
+  DutyCycleEncoder encoder = new DutyCycleEncoder(1);
   public ArmSubsystem() {
     leftArm.setNeutralMode(NeutralModeValue.Brake);
     rightArm.setNeutralMode(NeutralModeValue.Brake);
@@ -32,12 +34,9 @@ public class ArmSubsystem extends SubsystemBase {
     return armEncoder.getAbsolutePosition().getValueAsDouble() * 360;
   }
 
-  public void printPosition() {
-    System.out.println(armEncoder.getAbsolutePosition().getValueAsDouble() * 360);
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(getPosition() + " ARM");
   }
 }

@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class WristSubsystem extends SubsystemBase {
   /** Creates a new WristSubsystem. */
   CANSparkMax Wrist = new CANSparkMax (10, MotorType.kBrushless); 
-  DutyCycleEncoder encoder = new DutyCycleEncoder(2);
+  DutyCycleEncoder encoder = new DutyCycleEncoder(0);
 
   public WristSubsystem() {
     Wrist.setIdleMode(IdleMode.kBrake);
@@ -42,5 +42,6 @@ public class WristSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(encoder.getAbsolutePosition() * 360 + " WRIST");
   }
 }

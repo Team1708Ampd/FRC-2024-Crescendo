@@ -21,7 +21,7 @@ public class ArmDown extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.armSub.setSpeed(-.5);
+    Robot.armSub.setSpeed(-.75);
 
   }
 
