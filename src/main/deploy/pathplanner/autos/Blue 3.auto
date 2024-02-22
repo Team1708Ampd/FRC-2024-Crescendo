@@ -2,42 +2,86 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7220452902444284,
-      "y": 4.420390379242297
+      "x": 1.2647271448389068,
+      "y": 4.834801977296262
     },
-    "rotation": 121.82744657667317
+    "rotation": 147.99461679191648
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Blue 3.1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 3.2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 3.3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 3.4"
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPosition"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 3.1"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 3.2"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 3.3"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 3.4"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
-  "folder": "Blue Autos",
+  "folder": null,
   "choreoAuto": false
 }

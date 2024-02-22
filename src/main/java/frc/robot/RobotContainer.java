@@ -24,7 +24,8 @@ import frc.robot.commands.AmpPreset;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.AutoIntakeCommand;
-import frc.robot.commands.AutoShootCommand;
+import frc.robot.commands.AutoShooter;
+import frc.robot.commands.Feed;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakePreset;
 import frc.robot.commands.LowPowerShot;
@@ -87,8 +88,8 @@ public class RobotContainer
     configureBindings();
     NamedCommands.registerCommand("Intake", new AutoIntakeCommand());
     NamedCommands.registerCommand("Outtake", new OuttakeCommand());
-
-    NamedCommands.registerCommand("Shoot", new AutoShootCommand());
+    NamedCommands.registerCommand("Feed", new Feed());
+    NamedCommands.registerCommand("Shoot", new AutoShooter());
 
     NamedCommands.registerCommand("IntakePosition", new IntakePreset());
     NamedCommands.registerCommand("SpeakerPosition", new SpeakerPreset());
