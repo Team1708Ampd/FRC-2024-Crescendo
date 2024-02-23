@@ -21,10 +21,10 @@ public class SetArmToTop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.armSub.getPosition() < 281.5) {
-      Robot.armSub.setSpeed(0.5);
-    } else if(Robot.armSub.getPosition() > 284.5) {
-      Robot.armSub.setSpeed(-0.5);
+    if(Robot.armSub.getPosition() < 201) {
+      Robot.armSub.setSpeed(0.6);
+    } else if(Robot.armSub.getPosition() > 199) {
+      Robot.armSub.setSpeed(-0.6);
     }
   }
 
@@ -37,7 +37,7 @@ public class SetArmToTop extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(283 - Robot.armSub.getPosition()) <= 1.5) {
+    if(Math.abs(200 - Robot.armSub.getPosition()) <= 1) {
       return true;
     }
     return false;
