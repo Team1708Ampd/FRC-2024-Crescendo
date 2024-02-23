@@ -11,7 +11,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class CANdleSystem extends SubsystemBase {
     
     private final int CANDLE_ID = 6; 
-    private final int NUM_LEDS = 60;
+    private final int NUM_LEDS = 68;
     private final String CAN_BUS = "rio";
     private final CANdle m_candle_1 = new CANdle(CANDLE_ID, CAN_BUS);
 
