@@ -42,6 +42,7 @@ import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CANdleSystem;
 import java.io.File;
 
@@ -121,6 +122,8 @@ public class RobotContainer
     // joystick.start().onTrue(new SetArmToBottom());
 
     Trigger beam = new Trigger(() -> IntakeSubsystem.getBeam());
+    Trigger topSwitch = new Trigger (() -> ArmSubsystem.getTopSwitch());
+    Trigger bottomSwitch = new Trigger (() -> ArmSubsystem.getBottomSwitch());
 
     joystick.leftTrigger().and(beam).and(joystick.rightTrigger().negate()).whileTrue(new IntakeCommand());
     joystick.leftTrigger().and(joystick.rightTrigger()).whileTrue(new IntakeCommand());
@@ -130,11 +133,11 @@ public class RobotContainer
 
 
     mechanisms.rightTrigger().whileTrue(new WristDown());
-    mechanisms.leftTrigger().whileTrue(new ArmDown());
+    mechanisms.leftTrigger().and(bottomSwitch).whileTrue(new ArmDown());
     mechanisms.rightBumper().whileTrue(new WristUp());
-    mechanisms.leftBumper().whileTrue(new ArmUp());
+    mechanisms.leftBumper().and(topSwitch).whileTrue(new ArmUp());
     
-    // mechanisms.x().onTrue(new TrapPreset());
+    mechanisms.x().onTrue(new TrapPreset());
     mechanisms.a().onTrue(new IntakePreset());
     mechanisms.y().onTrue(new AmpPreset());
     mechanisms.b().onTrue(new SpeakerPreset());

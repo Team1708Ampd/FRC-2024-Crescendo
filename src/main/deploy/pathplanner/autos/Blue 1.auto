@@ -26,6 +26,12 @@
                       }
                     },
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPosition"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
                         "waitTime": 0.6

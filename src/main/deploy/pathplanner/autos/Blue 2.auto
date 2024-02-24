@@ -28,18 +28,6 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.05
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "SpeakerPosition"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
                         "waitTime": 0.5
                       }
                     },

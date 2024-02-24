@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,6 +20,9 @@ public class ArmSubsystem extends SubsystemBase {
   TalonFX leftArm = new TalonFX(8);
   TalonFX rightArm = new TalonFX(9);
   DutyCycleEncoder encoder = new DutyCycleEncoder(1);
+  static DigitalInput topSwitch = new DigitalInput(3); 
+  static DigitalInput bottomSwitch = new DigitalInput(4); 
+
   public ArmSubsystem() {
     leftArm.setNeutralMode(NeutralModeValue.Brake);
     rightArm.setNeutralMode(NeutralModeValue.Brake);
@@ -31,6 +35,14 @@ public class ArmSubsystem extends SubsystemBase {
 
   public double getPosition() {
     return encoder.getAbsolutePosition() * 360;
+  }
+
+  public static boolean getTopSwitch(){
+    return topSwitch.get();
+  }
+
+  public static boolean getBottomSwitch(){
+    return bottomSwitch.get();
   }
 
   @Override
