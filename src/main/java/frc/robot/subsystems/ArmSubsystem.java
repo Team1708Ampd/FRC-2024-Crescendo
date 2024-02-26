@@ -18,7 +18,6 @@ public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
   TalonFX leftArm = new TalonFX(8);
   TalonFX rightArm = new TalonFX(9);
-  CANcoder armEncoder = new CANcoder(4);
   DutyCycleEncoder encoder = new DutyCycleEncoder(1);
   public ArmSubsystem() {
     leftArm.setNeutralMode(NeutralModeValue.Brake);
@@ -31,12 +30,12 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public double getPosition() {
-    return armEncoder.getAbsolutePosition().getValueAsDouble() * 360;
+    return encoder.getAbsolutePosition() * 360;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(getPosition() + " ARM");
+    System.out.println(getPosition() + " ARM");
   }
 }

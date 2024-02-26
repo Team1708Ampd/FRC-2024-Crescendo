@@ -2,37 +2,87 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7911138899200891,
-      "y": 6.630585568863446
+      "x": 1.3041949160821413,
+      "y": 6.285242570485141
     },
-    "rotation": -120.96375653207355
+    "rotation": -155.5560452195835
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Blue 1.1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 1.2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 1.3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue 1.4"
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPosition"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.6
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 1.1"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 1.2"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 1.3"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 1.4"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              }
+            ]
           }
         }
       ]

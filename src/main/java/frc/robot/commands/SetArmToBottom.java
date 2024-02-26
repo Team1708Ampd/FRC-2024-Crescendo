@@ -21,8 +21,8 @@ public class SetArmToBottom extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.armSub.getPosition() > 108) {
-      Robot.armSub.setSpeed(-0.6);
+    if(Robot.armSub.getPosition() < 269) {
+      Robot.armSub.setSpeed(-0.5);
     }
 
   }
@@ -32,11 +32,11 @@ public class SetArmToBottom extends Command {
   public void end(boolean interrupted) {
     Robot.armSub.setSpeed(0);
   }
-
+ 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(Robot.armSub.getPosition() - 107) <= 1) {
+    if(Math.abs(Robot.armSub.getPosition() - 269) <= 1.5) {
       return true;
     }
     return false;

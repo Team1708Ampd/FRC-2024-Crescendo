@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.84,
-        "y": 7.18
+        "x": 3.731462847541081,
+        "y": 7.4988765362146115
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.455189230378461,
-        "y": 6.56824954572986
+        "x": 3.0605099548660664,
+        "y": 7.048131533186145
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.3337957445145674,
-        "y": 5.604423516539341
+        "x": 1.4225982298118458,
+        "y": 5.051874719134054
       },
       "prevControl": {
-        "x": 1.669271800082063,
-        "y": 6.038569000214923
+        "x": 1.9751470272171323,
+        "y": 5.407084660323168
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.4,
+      "waypointRelativePos": 0.1,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Outtake"
+                "name": "SpeakerPosition"
               }
             }
           ]
@@ -63,7 +63,7 @@
   "reversed": false,
   "folder": "Blue 1",
   "previewStartingState": {
-    "rotation": -150.64872318511001,
+    "rotation": -145.00797980144128,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.948535589378872,
-        "y": 5.545221859674489
+        "x": 3.672261190676229,
+        "y": 5.11
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.573591762568142,
-        "y": 5.574822688106915
+        "x": 3.2973173638654987,
+        "y": 5.139600828432426
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.3535296301361848,
-        "y": 5.0124069478908195
+        "x": 1.4916668294875064,
+        "y": 5.022273890701628
       },
       "prevControl": {
-        "x": 1.738340399757724,
-        "y": 5.042007776323246
+        "x": 1.8764775991090457,
+        "y": 5.051874719134054
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +30,25 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.1,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SpeakerPosition"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.49,
     "maxAcceleration": 5.49,
