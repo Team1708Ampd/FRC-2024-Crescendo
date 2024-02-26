@@ -26,6 +26,7 @@ import frc.robot.commands.ArmUp;
 import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.AutoShooter;
 import frc.robot.commands.Feed;
+import frc.robot.commands.FullPowerShot;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakePreset;
 import frc.robot.commands.LowPowerShot;
@@ -111,15 +112,7 @@ public class RobotContainer
         .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
         .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
     ));
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    // joystick.y().whileTrue(new ArmDown());
-    // joystick.leftBumper().whileTrue(new WristUp());
-    // joystick.rightBumper().whileTrue(new WristDown());
-    // joystick.x().whileTrue(new IntakeCommand());
-    // joystick.a().whileTrue(new ArmUp());
-    // joystick.b().whileTrue(new OuttakeCommand());
-    // joystick.rightTrigger().whileTrue(new Shooter()); 
-    // joystick.start().onTrue(new SetArmToBottom());
+    
 
     Trigger beam = new Trigger(() -> IntakeSubsystem.getBeam());
     Trigger topSwitch = new Trigger (() -> ArmSubsystem.getTopSwitch());
@@ -130,7 +123,7 @@ public class RobotContainer
     joystick.rightTrigger().and(joystick.start()).whileTrue(new LowPowerShot());
     joystick.leftBumper().whileTrue(new OuttakeCommand());
     joystick.rightTrigger().and(joystick.start().negate()).whileTrue(new Shooter());
-
+    joystick.rightTrigger().and(joystick.back()).whileTrue(new FullPowerShot());
 
     mechanisms.rightTrigger().whileTrue(new WristDown());
     mechanisms.leftTrigger().and(bottomSwitch).whileTrue(new ArmDown());
