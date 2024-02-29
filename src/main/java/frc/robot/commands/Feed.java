@@ -25,8 +25,8 @@ public class Feed extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.intakeSub.setpower(0.85);
-    Timer.delay(0.5);
+    Robot.intakeSub.setpower(1);
+    Timer.delay(0.7);
     stop = true;
   }
 
