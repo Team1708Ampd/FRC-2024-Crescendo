@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.2647271448389068,
-      "y": 4.834801977296262
+      "x": 1.383130458568611,
+      "y": 5.545221859674489
     },
-    "rotation": 147.99461679191648
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -15,6 +15,12 @@
           "type": "parallel",
           "data": {
             "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              },
               {
                 "type": "sequential",
                 "data": {
@@ -26,9 +32,15 @@
                       }
                     },
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPoistion"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 0.7
                       }
                     },
                     {
@@ -40,13 +52,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue 3.1"
+                        "pathName": "Blue 2.1"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue 3.2"
+                        "pathName": "Blue 2.2"
                       }
                     },
                     {
@@ -58,34 +70,10 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue 3.3"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Blue 3.4"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feed"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Blue 3.5"
+                        "pathName": "Copy of Blue 2.1"
                       }
                     }
                   ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shoot"
                 }
               }
             ]
