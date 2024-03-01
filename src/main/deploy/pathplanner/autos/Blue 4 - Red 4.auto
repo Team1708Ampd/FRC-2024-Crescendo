@@ -1,0 +1,87 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.383130458568611,
+      "y": 5.545221859674489
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPosition"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "SpeakerPoistion"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.7
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 2.1"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 2.2"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Copy of Blue 2.1"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
