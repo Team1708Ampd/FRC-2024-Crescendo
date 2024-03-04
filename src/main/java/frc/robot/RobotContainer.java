@@ -72,7 +72,7 @@ public class RobotContainer
                                                                  
   private final SendableChooser<Command> autoChooser;
 
-  private double MaxSpeed = 6; // 6 meters per second desired top speed
+  private double MaxSpeed = 8; // 6 meters per second desired top speed
   private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotation per second max angular velocity
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
