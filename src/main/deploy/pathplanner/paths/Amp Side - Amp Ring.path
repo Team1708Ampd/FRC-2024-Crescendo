@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.42,
-        "y": 6.04
+        "x": 15.305386764619682,
+        "y": 6.255641742052716
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9948809128387501,
-        "y": 5.851097086809559
+        "x": 15.325120650241297,
+        "y": 6.265508684863525
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.761063675973507,
-        "y": 5.11
+        "x": 12.828784119106702,
+        "y": 7.410074050917332
       },
       "prevControl": {
-        "x": 3.756130204568103,
-        "y": 5.0754657001621695
+        "x": 12.414372521052734,
+        "y": 7.617279849944316
+      },
+      "nextControl": {
+        "x": 13.658781120074295,
+        "y": 6.995075550433538
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.305386764619682,
+        "y": 6.255641742052716
+      },
+      "prevControl": {
+        "x": 15.305386764619682,
+        "y": 6.245774799241906
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0,
       "command": {
         "type": "parallel",
         "data": {
@@ -53,6 +69,23 @@
           ]
         }
       }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.25,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SpeakerPosition"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -63,13 +96,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -29.24882633654689,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Blue 1",
+  "folder": "Red Paths",
   "previewStartingState": {
-    "rotation": -157.59564654187113,
+    "rotation": -31.218402764346727,
     "velocity": 0
   },
   "useDefaultConstraints": true

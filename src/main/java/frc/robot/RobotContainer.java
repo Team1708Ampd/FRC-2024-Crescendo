@@ -25,6 +25,8 @@ import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.AutoShooter;
+import frc.robot.commands.ClimbersDown;
+import frc.robot.commands.ClimbersUp;
 import frc.robot.commands.Feed;
 import frc.robot.commands.FullPowerShot;
 import frc.robot.commands.IntakeCommand;
@@ -73,7 +75,7 @@ public class RobotContainer
   private final SendableChooser<Command> autoChooser;
 
   private double MaxSpeed = 8; // 6 meters per second desired top speed
-  private double MaxAngularRate = 4 * Math.PI; // 3/4 of a rotation per second max angular velocity
+  private double MaxAngularRate = 5 * Math.PI; // 3/4 of a rotation per second max angular velocity
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
@@ -134,6 +136,9 @@ public class RobotContainer
     mechanisms.a().onTrue(new IntakePreset());
     mechanisms.y().onTrue(new AmpPreset());
     mechanisms.b().onTrue(new SpeakerPreset());
+    
+    mechanisms.back().onTrue(new ClimbersUp());
+    mechanisms.start().onTrue(new ClimbersDown());
   }
 
   /**
