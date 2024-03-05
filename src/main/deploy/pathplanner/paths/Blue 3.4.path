@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6709306187843156,
-        "y": 6.096020202809636
+        "x": 3.672261190676229,
+        "y": 5.9892342861608805
       },
       "isLocked": false,
       "linkedName": null
@@ -63,7 +63,7 @@
   "reversed": false,
   "folder": "Blue 3",
   "previewStartingState": {
-    "rotation": -178.26429541107146,
+    "rotation": -153.24585296797758,
     "velocity": 0
   },
   "useDefaultConstraints": true
