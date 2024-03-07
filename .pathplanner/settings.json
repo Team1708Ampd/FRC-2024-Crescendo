@@ -6,12 +6,14 @@
     "Blue 1",
     "Blue 2",
     "Blue 3",
-    "Blue 4"
+    "Blue 4",
+    "Blue 6",
+    "Red 8"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 5.49,
-  "defaultMaxAccel": 5.49,
+  "defaultMaxVel": 8.5,
+  "defaultMaxAccel": 8.5,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
-  "maxModuleSpeed": 4.5
+  "maxModuleSpeed": 6.0
 }
