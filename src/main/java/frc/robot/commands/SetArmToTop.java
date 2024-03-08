@@ -22,7 +22,7 @@ public class SetArmToTop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.armSub.setSpeed(0.65);
+    Robot.armSub.setSpeed(0.8);
   }
 
   // Called once the command ends or is interrupted.

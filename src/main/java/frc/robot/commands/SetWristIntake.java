@@ -22,9 +22,9 @@ public class SetWristIntake extends Command {
   @Override
   public void execute() {
     if(Robot.wristSub.getAngle() > 86) {
-      Robot.wristSub.setSpeed(0.25);
+      Robot.wristSub.setSpeed(0.275);
     } else if(Robot.wristSub.getAngle() < 86) {
-      Robot.wristSub.setSpeed(-0.25);
+      Robot.wristSub.setSpeed(-0.275);
     }
   }
 

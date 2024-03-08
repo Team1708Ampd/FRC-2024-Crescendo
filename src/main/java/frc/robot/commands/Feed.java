@@ -26,7 +26,7 @@ public class Feed extends Command {
   @Override
   public void execute() {
     Robot.intakeSub.setpower(1);
-    Timer.delay(0.7);
+    Timer.delay(0.4);
     stop = true;
   }
 

@@ -90,6 +90,12 @@
                       "data": {
                         "name": "Feed"
                       }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue 2.7"
+                      }
                     }
                   ]
                 }
