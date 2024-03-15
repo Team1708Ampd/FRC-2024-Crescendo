@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,6 +17,11 @@ public class ClimberSub extends SubsystemBase {
   /** Creates a new ClimberSub. */
   CANSparkMax leftClimber = new CANSparkMax(14, MotorType.kBrushless);
   CANSparkMax rightClimber = new CANSparkMax(15, MotorType.kBrushless);
+
+  public ClimberSub() {
+    leftClimber.setIdleMode(IdleMode.kBrake);
+    rightClimber.setIdleMode(IdleMode.kBrake);
+  }
 
 
   public void setClimbers(double speed) {
