@@ -8,20 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3099999999999996,
-        "y": 5.55
+        "x": 3.0309099079736637,
+        "y": 8.04155839080909
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 12.828784119106702,
-        "y": 6.265508684863524
+        "x": 9.6516285340263,
+        "y": 6.3641781129716115
       },
       "prevControl": {
-        "x": 9.523358277485787,
-        "y": 7.725816220863212
+        "x": 8.427777190166088,
+        "y": 6.36848744868943
+      },
+      "nextControl": {
+        "x": 12.453840292295968,
+        "y": 6.354311170160802
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 13.568804829917356,
+        "y": 6.3641781129716115
+      },
+      "prevControl": {
+        "x": 13.558937887106545,
+        "y": 6.393778941404038
       },
       "nextControl": null,
       "isLocked": false,
@@ -41,13 +57,13 @@
             {
               "type": "named",
               "data": {
-                "name": "IntakePosition"
+                "name": "Intake"
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "Intake"
+                "name": "IntakePosition"
               }
             }
           ]
@@ -63,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 178.8308606720925,
+    "rotation": 180.0,
     "rotateFast": false
   },
   "reversed": false,
