@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 0.1
                       }
                     },
                     {
@@ -95,6 +95,12 @@
                       "type": "path",
                       "data": {
                         "pathName": "Blue 2.7"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed"
                       }
                     }
                   ]

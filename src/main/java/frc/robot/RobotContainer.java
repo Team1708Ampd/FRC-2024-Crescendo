@@ -137,8 +137,11 @@ public class RobotContainer
     mechanisms.y().onTrue(new AmpPreset());
     mechanisms.b().onTrue(new SpeakerPreset());
     
-    joystick.back().whileTrue(new ClimbersUp());
-    joystick.start().whileTrue(new ClimbersDown());
+    mechanisms.back().whileTrue(new ClimbersUp());
+    mechanisms.start().whileTrue(new ClimbersDown());
+
+    joystick.start().whileTrue(new LowPowerShot());
+    joystick.back().and(joystick.start()).whileTrue(new IntakeCommand());
   }
 
   /**
