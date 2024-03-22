@@ -21,9 +21,9 @@ public class SetWristAmp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.wristSub.getAngle() > 112) {
+    if(Robot.wristSub.getAngle() > 105) {
       Robot.wristSub.setSpeed(0.275);
-    } else if(Robot.wristSub.getAngle() < 112) {
+    } else if(Robot.wristSub.getAngle() < 105) {
       Robot.wristSub.setSpeed(-0.275);
     }
   }
@@ -37,7 +37,7 @@ public class SetWristAmp extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(Robot.wristSub.getAngle() - 112) <= 1) {
+    if(Math.abs(Robot.wristSub.getAngle() - 105) <= 1) {
       return true;
     }
     return false;

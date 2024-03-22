@@ -42,6 +42,6 @@ public class WristSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(encoder.getAbsolutePosition() * 360 + " WRIST");
+    System.out.println(encoder.getAbsolutePosition() * 360 + " WRIST");
   }
 }

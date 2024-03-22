@@ -74,15 +74,15 @@
                       }
                     },
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "Blue 2.5"
+                        "name": "Feed"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue 2.6"
+                        "pathName": "Blue 2.7"
                       }
                     },
                     {
