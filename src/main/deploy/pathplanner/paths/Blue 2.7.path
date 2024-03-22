@@ -8,36 +8,68 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0309099079736637,
-        "y": 8.04155839080909
+        "x": 3.395986791973585,
+        "y": 8.515171645727907
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 9.663846089465915,
-        "y": 6.089635003807117
+        "x": 10.184443445809968,
+        "y": 5.900431800863602
       },
       "prevControl": {
-        "x": 9.008039242906987,
-        "y": 8.29127227441477
+        "x": 9.710830190891151,
+        "y": 7.28180379437682
       },
       "nextControl": {
-        "x": 9.738076502027656,
-        "y": 5.840432904490781
+        "x": 10.192936276055296,
+        "y": 5.875661045981398
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 13.891458082493042,
-        "y": 6.089635003807117
+        "x": 14.940309880619761,
+        "y": 5.594556573728532
       },
       "prevControl": {
-        "x": 13.88159113968223,
-        "y": 6.119235832239543
+        "x": 14.93044293780895,
+        "y": 5.624157402160958
+      },
+      "nextControl": {
+        "x": 14.950176823430573,
+        "y": 5.564955745296106
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.184443445809968,
+        "y": 5.900431800863602
+      },
+      "prevControl": {
+        "x": 10.224733350209796,
+        "y": 5.8443319339777675
+      },
+      "nextControl": {
+        "x": 9.404954963756081,
+        "y": 6.985795510052558
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.343662687325376,
+        "y": 5.594556573728532
+      },
+      "prevControl": {
+        "x": 4.629354643324673,
+        "y": 8.702643559133271
       },
       "nextControl": null,
       "isLocked": false,
@@ -64,6 +96,46 @@
               "type": "named",
               "data": {
                 "name": "IntakePosition"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 2.95,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SpeakerPosition"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.9,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakePosition"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
               }
             }
           ]

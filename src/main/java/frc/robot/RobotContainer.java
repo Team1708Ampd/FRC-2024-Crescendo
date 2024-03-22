@@ -53,6 +53,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -137,8 +138,11 @@ public class RobotContainer
     mechanisms.y().onTrue(new AmpPreset());
     mechanisms.b().onTrue(new SpeakerPreset());
     
-    joystick.back().whileTrue(new ClimbersUp());
-    joystick.start().whileTrue(new ClimbersDown());
+    mechanisms.back().whileTrue(new ClimbersUp());
+    mechanisms.start().whileTrue(new ClimbersDown());
+
+    joystick.start().whileTrue(new LowPowerShot());
+    joystick.back().and(joystick.start()).whileTrue(new IntakeCommand());
   }
 
   /**
